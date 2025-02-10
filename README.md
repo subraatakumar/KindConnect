@@ -1,0 +1,4 @@
+- Clone the repo
+- run `npm install --legacy-peer-deps`
+- run `npx husky`
+- run `chmod +x .husky/pre-commit`

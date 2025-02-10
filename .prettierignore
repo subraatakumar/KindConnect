@@ -1,0 +1,21 @@
+# The GH actions don't seem to compile and verify themselves well when Prettier is applied to them
+.github/workflows/eslint.yml
+android
+ios
+package.json
+package-lock.json
+babel.config.js 
+metro.config.js
+tsconfig.json
+jest.config.js
+app.json
+README.md
+.eslint.js
+.prettierrc.js
+.watchmanconfig
+*.html
+*.yml
+*.yaml
+*.css
+*.scss
+*.md
