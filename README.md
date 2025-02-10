@@ -1,0 +1,3 @@
+- Clone the repo
+- run `npx husky`
+- run `chmod +x .husky/pre-commit`
