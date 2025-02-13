@@ -5,7 +5,7 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
+  Pressable,
 } from 'react-native';
 
 // Category data
@@ -24,7 +24,7 @@ const categories = [
   {id: 12, title: 'Travel', icon: '✈️', color: '#87CEEB'},
 ];
 
-const CategoryList: React.FC = () => {
+const CategoryList = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Filter categories based on the search query
@@ -51,12 +51,21 @@ const CategoryList: React.FC = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.categoriesContainer}>
           {filteredCategories.map(category => (
-            <TouchableOpacity
+            <Pressable
               key={category.id}
-              style={[styles.categoryCard, {backgroundColor: category.color}]}>
+              style={({pressed}) => [
+                styles.categoryCard,
+                {backgroundColor: category.color},
+                pressed && styles.pressed,
+              ]}
+              android_ripple={{color: '#ffffff50'}}
+              onPress={() => {
+                // Handle category press
+                console.log(`Selected category: ${category.title}`);
+              }}>
               <Text style={styles.categoryIcon}>{category.icon}</Text>
               <Text style={styles.categoryTitle}>{category.title}</Text>
-            </TouchableOpacity>
+            </Pressable>
           ))}
         </View>
       </ScrollView>
@@ -74,6 +83,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: 16,
     paddingBottom: 8,
+    alignSelf: 'center',
   },
   searchContainer: {
     paddingHorizontal: 16,
@@ -123,6 +133,10 @@ const styles = StyleSheet.create({
   categoryIcon: {
     fontSize: 30,
     alignSelf: 'flex-end',
+  },
+  pressed: {
+    opacity: 0.75,
+    transform: [{scale: 0.98}],
   },
 });
 

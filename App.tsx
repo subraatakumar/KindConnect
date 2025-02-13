@@ -18,7 +18,9 @@ function App(): React.JSX.Element {
 
   return (
     <SafeAreaView>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        showsVerticalScrollIndicator={false}>
         <Text>Sample App: {uniqueId}</Text>
         <SearchCategoryList />
       </ScrollView>
