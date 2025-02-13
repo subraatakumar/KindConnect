@@ -8,6 +8,7 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView, Text} from 'react-native';
 import {getUniqueId} from 'react-native-device-info';
+import SearchCategoryList from './src/SearchCategoryList';
 function App(): React.JSX.Element {
   const [uniqueId, setUniqueId] = useState('');
 
@@ -19,6 +20,7 @@ function App(): React.JSX.Element {
     <SafeAreaView>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Text>Sample App: {uniqueId}</Text>
+        <SearchCategoryList />
       </ScrollView>
     </SafeAreaView>
   );
