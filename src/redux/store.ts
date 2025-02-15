@@ -1,10 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {colorsSlice, configSlice} from '@redux/slices';
+import categoriesReducer from './slices/categoriesSlice';
 
 export const store = configureStore({
   reducer: {
     colors: colorsSlice,
     configs: configSlice,
+    categories: categoriesReducer,
   },
 });
 

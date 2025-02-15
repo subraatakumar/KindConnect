@@ -8,35 +8,24 @@ import {
   Pressable,
   ActivityIndicator,
 } from 'react-native';
-import {configs} from '@utils/configdata';
-import {Category} from '../types/category';
-import fetchCategories from '../services/api';
+import {useAppDispatch, useAppSelector} from '../redux/hooks';
+import {fetchCategoriesAsync} from '../redux/slices/categoriesSlice';
 
 function SearchCategoryList() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useAppDispatch();
+  const {
+    data: categories,
+    loading,
+    error,
+  } = useAppSelector(state => state.categories);
+  const configData = useAppSelector(state => state.configs);
 
-  const {headerTitle, searchPlaceholder} = configs.searchCategories;
-
-  const loadCategories = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const response = await fetchCategories();
-      setCategories(response.categories);
-    } catch (err) {
-      setError('Failed to load categories. Please try again later.');
-      console.error('Error fetching categories:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {headerTitle, searchPlaceholder} = configData.searchCategories || {};
 
   useEffect(() => {
-    loadCategories();
-  }, []);
+    dispatch(fetchCategoriesAsync());
+  }, [dispatch]);
 
   const styles = StyleSheet.create({
     container: {
@@ -46,9 +35,10 @@ function SearchCategoryList() {
     header: {
       fontSize: 34,
       fontWeight: 'bold',
-      padding: 16,
-      paddingBottom: 8,
+      // padding: 16,
+      // paddingBottom: 8,
       alignSelf: 'center',
+      color: 'red',
     },
     searchContainer: {
       paddingHorizontal: 16,
@@ -143,7 +133,9 @@ function SearchCategoryList() {
     return (
       <View style={styles.centerContainer}>
         <Text style={styles.errorText}>{error}</Text>
-        <Pressable style={styles.retryButton} onPress={loadCategories}>
+        <Pressable
+          style={styles.retryButton}
+          onPress={() => dispatch(fetchCategoriesAsync())}>
           <Text style={styles.retryButtonText}>Retry</Text>
         </Pressable>
       </View>
@@ -152,7 +144,7 @@ function SearchCategoryList() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>{headerTitle}</Text>
+      <Text style={styles.header}>{headerTitle || 'Default Title'} </Text>
       <View style={styles.searchContainer}>
         <View style={styles.searchInputWrapper}>
           <Text style={styles.searchIcon}>🔍</Text>

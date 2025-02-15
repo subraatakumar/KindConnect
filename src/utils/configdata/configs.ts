@@ -64,8 +64,8 @@ const configs = {
       {id: 11, title: 'word', icon: '📝', colorKey: 'button.success.primary'},
       {id: 12, title: 'travel', icon: '✈️', colorKey: 'button.success.primary'},
     ],
-    headerTitle: 'search',
-    searchPlaceholder: 'gamesAppsStoriesAndMore',
+    headerTitle: 'Search',
+    searchPlaceholder: 'Games Apps Stories And More',
   },
 };
 
