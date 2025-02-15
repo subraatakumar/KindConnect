@@ -40,6 +40,17 @@ module.exports = {
     'jsx-a11y/no-autofocus': 'warn', // Prevents autofocus, which can be bad for accessibility
 
     // Add any other rules you want to enforce
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: [
+          '**/*.test.{ts,tsx}',
+          '**/*.spec.{ts,tsx}',
+          'metro.config.js',
+          '.eslintrc.js',
+        ],
+      },
+    ],
   },
   settings: {
     react: {

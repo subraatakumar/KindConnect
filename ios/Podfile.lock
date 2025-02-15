@@ -1509,7 +1509,7 @@ PODS:
     - React-logger (= 0.76.1)
     - React-perflogger (= 0.76.1)
     - React-utils (= 0.76.1)
-  - RNDeviceInfo (14.0.0):
+  - RNDeviceInfo (14.0.4):
     - React-Core
   - SocketRocket (0.7.1)
   - Yoga (0.0.0)
@@ -1780,9 +1780,9 @@ SPEC CHECKSUMS:
   React-utils: 5362bd16a9563f9916e7a56c011ddc533507650f
   ReactCodegen: 865bafc5c17ec2181620ced1a32c39c38ab2951d
   ReactCommon: 422e364463f33e336fc4db196aeb50fd801d90d6
-  RNDeviceInfo: 6192a9c9167e256803e554038b22b3b2b40163dc
+  RNDeviceInfo: feea80a690d2bde1fe51461cf548039258bd03f2
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
-  Yoga: 157bed1c62656587df4639d4dc29714898f8fb10
+  Yoga: db69236006b8b1c6d55ab453390c882306cbf219
 
 PODFILE CHECKSUM: 3e1eeaaeb112facd24e077f97406747923faaf16
 
