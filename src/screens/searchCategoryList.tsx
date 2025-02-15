@@ -7,6 +7,7 @@ import {
   TextInput,
   Pressable,
   ActivityIndicator,
+  SafeAreaView,
 } from 'react-native';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {fetchCategoriesAsync} from '../redux/slices/categoriesSlice';
@@ -35,10 +36,8 @@ function SearchCategoryList() {
     header: {
       fontSize: 34,
       fontWeight: 'bold',
-      // padding: 16,
-      // paddingBottom: 8,
+      paddingBottom: 8,
       alignSelf: 'center',
-      color: 'red',
     },
     searchContainer: {
       paddingHorizontal: 16,
@@ -143,7 +142,7 @@ function SearchCategoryList() {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.header}>{headerTitle || 'Default Title'} </Text>
       <View style={styles.searchContainer}>
         <View style={styles.searchInputWrapper}>
@@ -179,7 +178,7 @@ function SearchCategoryList() {
           ))}
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
