@@ -1,12 +1,14 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {colorsSlice, configSlice} from '@redux/slices';
-import categoriesReducer from './slices/categoriesSlice';
+import categoriesReducer from '@redux/slices/categoriesSlice';
+import dimSlice from '@redux/slices/dimSlice';
 
 export const store = configureStore({
   reducer: {
     colors: colorsSlice,
     configs: configSlice,
     categories: categoriesReducer,
+    dim: dimSlice,
   },
 });
 

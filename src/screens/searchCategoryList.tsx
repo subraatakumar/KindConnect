@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   View,
@@ -10,7 +10,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
-import {fetchCategoriesAsync} from '../redux/slices/categoriesSlice';
+import {setCategories} from '../redux/slices/categoriesSlice';
 
 function SearchCategoryList() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -20,72 +20,71 @@ function SearchCategoryList() {
     loading,
     error,
   } = useAppSelector(state => state.categories);
-  const configData = useAppSelector(state => state.configs);
+  const configs = useAppSelector(state => state.configs);
+  const dim = useAppSelector(state => state.dim);
+  const colors = useAppSelector(state => state.colors);
 
-  const {headerTitle, searchPlaceholder} = configData.searchCategories || {};
-
-  useEffect(() => {
-    dispatch(fetchCategoriesAsync());
-  }, [dispatch]);
+  const {headerTitle, searchInput} = configs.elements;
 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: colors.ui.background,
     },
     header: {
-      fontSize: 34,
+      fontSize: dim.fontSize.xlarge,
       fontWeight: 'bold',
-      paddingBottom: 8,
+      paddingBottom: dim.spacing.sm,
       alignSelf: 'center',
+      color: colors.brand.primary,
     },
     searchContainer: {
-      paddingHorizontal: 16,
-      marginBottom: 16,
+      paddingHorizontal: dim.spacing.md,
+      marginBottom: dim.spacing.md,
     },
     searchInputWrapper: {
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: '#f0f0f0',
-      borderRadius: 10,
-      padding: 8,
+      backgroundColor: colors.ui.background,
+      borderRadius: dim.radius.medium,
+      padding: dim.spacing.sm,
     },
     searchIcon: {
-      fontSize: 16,
-      marginRight: 8,
-      color: '#666',
+      fontSize: dim.fontSize.medium,
+      marginRight: dim.spacing.xs,
+      color: colors.text.secondary,
     },
     micIcon: {
-      fontSize: 16,
-      marginLeft: 8,
-      color: '#666',
+      fontSize: dim.fontSize.medium,
+      marginLeft: dim.spacing.xs,
+      color: colors.text.secondary,
     },
     searchInput: {
       flex: 1,
-      fontSize: 17,
-      color: '#666',
+      fontSize: dim.fontSize.medium,
+      color: colors.text.primary,
     },
     categoriesContainer: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      padding: 8,
+      padding: dim.spacing.sm,
     },
     categoryCard: {
       width: '44%',
       margin: '3%',
-      borderRadius: 16,
-      padding: 16,
+      borderRadius: dim.radius.large,
+      padding: dim.spacing.md,
       height: 120,
       justifyContent: 'space-between',
     },
     categoryTitle: {
-      fontSize: 20,
+      fontSize: dim.fontSize.large,
       fontWeight: '600',
-      color: '#fff',
-      marginTop: 8,
+      color: colors.text.onPrimary,
+      marginTop: dim.spacing.xs,
     },
     categoryIcon: {
-      fontSize: 30,
+      fontSize: dim.fontSize.xlarge,
       alignSelf: 'flex-end',
     },
     pressed: {
@@ -96,22 +95,22 @@ function SearchCategoryList() {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#fff',
+      backgroundColor: colors.ui.background,
     },
     errorText: {
-      color: 'red',
-      fontSize: 16,
+      color: colors.interactive,
+      fontSize: dim.fontSize.medium,
       textAlign: 'center',
-      marginBottom: 16,
+      marginBottom: dim.spacing.md,
     },
     retryButton: {
-      backgroundColor: '#0000ff',
-      padding: 12,
-      borderRadius: 8,
+      backgroundColor: colors.button.primary.primary,
+      padding: dim.spacing.sm,
+      borderRadius: dim.radius.small,
     },
     retryButtonText: {
-      color: '#fff',
-      fontSize: 16,
+      color: colors.button.primary.textActive,
+      fontSize: dim.fontSize.medium,
     },
   });
 
@@ -123,7 +122,7 @@ function SearchCategoryList() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color={colors.brand.primary} />
       </View>
     );
   }
@@ -134,7 +133,7 @@ function SearchCategoryList() {
         <Text style={styles.errorText}>{error}</Text>
         <Pressable
           style={styles.retryButton}
-          onPress={() => dispatch(fetchCategoriesAsync())}>
+          onPress={() => dispatch(setCategories([]))}>
           <Text style={styles.retryButtonText}>Retry</Text>
         </Pressable>
       </View>
@@ -143,13 +142,13 @@ function SearchCategoryList() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>{headerTitle || 'Default Title'} </Text>
+      <Text style={styles.header}>{headerTitle.value}</Text>
       <View style={styles.searchContainer}>
         <View style={styles.searchInputWrapper}>
           <Text style={styles.searchIcon}>🔍</Text>
           <TextInput
             style={styles.searchInput}
-            placeholder={searchPlaceholder}
+            placeholder={searchInput.placeholder}
             value={searchQuery}
             onChangeText={setSearchQuery}
           />
@@ -164,7 +163,7 @@ function SearchCategoryList() {
               key={category.id}
               style={({pressed}) => [
                 styles.categoryCard,
-                {backgroundColor: category.color},
+                {backgroundColor: category.colorKey},
                 pressed && styles.pressed,
               ]}
               android_ripple={{color: '#ffffff50'}}
