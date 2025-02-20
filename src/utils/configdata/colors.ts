@@ -16,7 +16,7 @@ const colors = {
     background: '#FFFFFF',
   },
 
-  // Icon Colors
+  // Button Colors
   button: {
     primary: {
       primary: '#ffffff',
@@ -40,6 +40,7 @@ const colors = {
       textInActive: '#ffffff',
     },
   },
+
   // Text Colors
   text: {
     title: '#181d22',
@@ -62,12 +63,12 @@ const colors = {
     overlay: 'rgba(0, 0, 0, 0.5)', // Semi-transparent overlay for modals, etc. (Black with alpha)
   },
 
-  // Semantic Colors (Contextual) - These can be aliases or more specific
-  interactive: '#2CB6FF', // Color for interactive elements like buttons (Blue) - Alias of brand.primary
-  highlight: '#FFB86B', // Color for highlights (Orange) - Alias of brand.secondary
-  placeholder: '#A8B2BC', // Placeholder text color (Gray) - Alias of text.secondary
-  error: '#FF0000', // Example error color (Red) - Add as needed
-  success: '#008000', // Example success color (Green) - Add as needed
+  // Semantic Colors (Contextual)
+  interactive: '#2CB6FF', // Color for interactive elements like buttons (Blue)
+  highlight: '#FFB86B', // Color for highlights (Orange)
+  placeholder: '#A8B2BC', // Placeholder text color (Gray)
+  error: '#FF0000', // Example error color (Red)
+  success: '#008000', // Example success color (Green)
 };
 
 export default colors;
